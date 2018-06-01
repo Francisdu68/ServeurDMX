@@ -140,7 +140,8 @@ Socket::~Socket()
 
 void Socket::sendACK(string a)
 {
-	char reponse[]= "0";
+	char reponse[100];
+	memset(reponse, 0x00, 100*sizeof(char));
 	strcpy(reponse, a.c_str());
 	sendto(descripteurSocket, reponse,sizeof(reponse), 0, (struct sockaddr *)&pointDeRencontreDistant, longueurAdresse);
 }

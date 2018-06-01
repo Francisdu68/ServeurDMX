@@ -22,10 +22,10 @@
 #include "json.h"
 #include "enttecdmxusb.h"
 #include "fichierJSON.h"
-#include "threadServeur.h"
+
 #include "couleur.h"
 #include "threadDMX.h"
-
+#include "threadServeur.h"
 using namespace std;
 
 #define DMXDEVICE "/dev/ttyUSB0"
@@ -83,7 +83,6 @@ int main()
 		//On attend que les 2 fonctions soient termiénes avant de finir le programme
 		first.join();
 		second.join();
-		cout << "Execution des threads terminée " << endl;
 		
 	}
     delete interfaceDMX;

@@ -33,10 +33,10 @@ public:
 			
 			string n;
 			
-			storyboard *scene;
-			scene = new storyboard();
+			
 			while (1)
 			{
+				
 				if (*accesFichier == 0)
 				{
 					if(fichierJSON::ouvrirJSON("test.json")!=NULL)
@@ -46,11 +46,12 @@ public:
 						
 						//On regarde si c'est une storyboard ou un changement de couleur qui a été envoyé
 						n = value->u.object.values[0].name;
-						cout << "n = " << n << endl;
 						//scene = new storyboard();
 						//Si c'est une storyboard :
 						if (n == "storyboard")
 						{
+							storyboard *scene;
+							scene = new storyboard();
 							//On crée un vecteur scene qui contiendra chaque élement de la storyboard
 							//On crée un objet element de story board que l'on ajoutera au vecteur storyboard
 							
@@ -65,63 +66,61 @@ public:
 							
 							int length = value->u.object.values[0].value->u.object.values[0].value->u.array.length;
 							
-							cout << "\n length = "<< length << endl;
-							
 							//Pour chaque elements du json, l'elemnt storyboard recupere la cible, son adresse, les differentes valeures voulues
 							//et le temp qu'il doit durer
 							//A la fin de chaque boucle on ajoute l'element de la storyboard dans le vecteur storyboard
 							for (int a = 0; a < length; a++) 
 							{
 								elem1->setCible(fichierJSON::getName(value->u.object.values[0].value->u.object.values[0].value->u.array.values[a],"target"));
-								cout << "target";
+								
 								elem1->setAddr(fichierJSON::getNameInt(value->u.object.values[0].value->u.object.values[0].value->u.array.values[a],"targetAddress"));
-								cout << "targetAddr";
+								
 								elem1->setBlue(fichierJSON::getNameInt(value->u.object.values[0].value->u.object.values[0].value->u.array.values[a],"blue"));
-								cout << "blue";
+								
 								elem1->setRed(fichierJSON::getNameInt(value->u.object.values[0].value->u.object.values[0].value->u.array.values[a],"red"));
-								cout << "red";
+								
 								elem1->setGreen(fichierJSON::getNameInt(value->u.object.values[0].value->u.object.values[0].value->u.array.values[a],"green"));
-								cout << "green";
+								
 								elem1->setWhite(fichierJSON::getNameInt(value->u.object.values[0].value->u.object.values[0].value->u.array.values[a],"white"));
-								cout << "intensity";
+								
 								elem1->setTime(fichierJSON::getNameInt(value->u.object.values[0].value->u.object.values[0].value->u.array.values[a],"time"));
-								cout << "time";
 
 								scene->ajouterElem(*elem1);
 							}
 							scene->visualiserStoryBoard();
 							delete elem1;
+							fichierJSON::fermerJSON(value);
+							*accesFichier = 1;
+							while(*accesFichier == 1)
+							{
+								scene->lireStoryBoard(interfaceDMX);
+							}
+							delete scene;
 						}
 						
 						else if (n == "couleur")
 						{
-							cout << "--------------test-----------------" << endl;
 							string cible = fichierJSON::getName(value->u.object.values[0].value, "target");
-							cout << "Cible = " << cible << endl;
 							
 							if (cible == "PROJO" || cible == "LYRE")
 							{
 								couleur::setCouleur(interfaceDMX, cible, value);
 							}
+							fichierJSON::fermerJSON(value);
+							*accesFichier = 1;
 						}
-						fichierJSON::fermerJSON(value);
-						*accesFichier = 1;
+						else
+						{
+							fichierJSON::fermerJSON(value);
+							*accesFichier = 1;
+						}
 					}
 					else
 					{
 						*accesFichier = 1;
 					}
-				}
-				//On joue la sotryboard apres avoir fermé le fichier et libéré son acces pour le threadSocket
-				if (n == "storyboard")
-				{
-					scene->lireStoryBoard(interfaceDMX);
-				}
-				
-			}
-			delete scene;
-		}
-		
-	}
-	
+				}				
+			}			
+		}		
+	}	
 };

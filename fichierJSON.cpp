@@ -51,7 +51,7 @@ int fichierJSON::getNameInt(json_value* value, string name)
 	
 	if (value == NULL) 
 	{
-		cout << "value = NULL";
+		cout << "value = NULL\n";
 		return 0;
 	}
 	length = value->u.object.length;
@@ -105,21 +105,6 @@ void fichierJSON::setConfig(json_value* value, int &port, int &portDistant, int 
 	{
 		portDistant = atoi(getName(value, "PORTDISTANT").c_str());
 	}
-	
-	if(getName(value, "NBCANAUXPROJO")!="")
-	{
-		nbCanauxProjo = atoi(getName(value, "NBCANAUXPROJO").c_str());
-	}
-	
-	if(getName(value, "NBCANAUXLYRE")!="")
-	{
-		nbCanauxLyre = atoi(getName(value, "NBCANAUXLYRE").c_str());
-	}
-	
-	if(getName(value, "TAILLEBUSDMX")!="")
-	{
-		tailleBusDMX = atoi(getName(value, "TAILLEBUSDMX").c_str());
-	}
 }
 
 //Ouvrir le fichier JSOn avant de pouvoir l'utiliser
@@ -161,10 +146,6 @@ json_value* fichierJSON::ouvrirJSON(string fileName)
 			return NULL;
         }
         fclose (fp);
-
-        cout << file_contents << endl;
-
-        cout << "--------------------------------\n\n";
 
         json = (json_char*)file_contents;
 
