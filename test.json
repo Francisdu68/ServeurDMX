@@ -1,1 +1,1 @@
-{"couleur":{"target":"BARRELED","targetAddress":1,"red":255,"green":0,"blue":0,"intensity":255}}
+{"storyboard":{"elements":[{"blue":0,"green":0,"red":0,"target":"SPOTLED","targetAddress":21,"time":0,"white":0},{"blue":0,"green":0,"red":0,"target":"SPOTLED","targetAddress":21,"time":0,"white":0},{"blue":0,"green":0,"red":0,"target":"SPOTLED","targetAddress":21,"time":0,"white":0},{"blue":0,"green":0,"red":0,"target":"SPOTLED","targetAddress":21,"time":0,"white":0}],"name":"MyStoryBoard"}}

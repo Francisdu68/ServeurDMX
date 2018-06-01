@@ -10,4 +10,5 @@ public:
 	void ajouterElem(elemStoryBoard);
 	void visualiserStoryBoard();
 	void lireStoryBoard(EnttecDMXUSB*);
+	static void remiseAZero(EnttecDMXUSB*);
 };

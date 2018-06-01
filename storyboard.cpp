@@ -40,6 +40,14 @@ void storyboard::visualiserStoryBoard()
 	}
 }
 
+void storyboard::remiseAZero(EnttecDMXUSB *interfaceDMX)
+{
+	for (int i = 1; i<= 512; i++)
+	{
+		interfaceDMX->SetCanalDMX(i,0);//On prepare la trame DMX avec les valeur a envoyer au boitier DMX a partir des valeurs du tableau
+	}
+}
+
 //On lance la storyboard, c'est à dire qu'on va jouer les élement qu'elle contient sur les projecteurs
 void storyboard::lireStoryBoard(EnttecDMXUSB *interfaceDMX)
 {
@@ -47,6 +55,7 @@ void storyboard::lireStoryBoard(EnttecDMXUSB *interfaceDMX)
 	
 	int valeurDMX[TAILLEBUSDMX];//tableau contenant les Valeur des 512 canaux du bus DMX
 	memset(valeurDMX,0x00, TAILLEBUSDMX);
+	
 	
 	int length = scene.size();
 	for(int i=0; i < length; i++)

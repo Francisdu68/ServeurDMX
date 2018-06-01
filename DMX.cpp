@@ -55,4 +55,3 @@ string DMX::getType()
 {
 	return type;
 }
-

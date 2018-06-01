@@ -93,6 +93,7 @@ public:
 							*accesFichier = 1;
 							while(*accesFichier == 1)
 							{
+								storyboard::remiseAZero(interfaceDMX);
 								scene->lireStoryBoard(interfaceDMX);
 							}
 							delete scene;
@@ -105,6 +106,10 @@ public:
 							if (cible == "BARRELED" || cible == "SPOTLED")
 							{
 								couleur::setCouleur(interfaceDMX, cible, value);
+							}
+							else
+							{
+								cout << "Cible invalide" << endl;
 							}
 							fichierJSON::fermerJSON(value);
 							*accesFichier = 1;
