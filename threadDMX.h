@@ -102,7 +102,7 @@ public:
 						{
 							string cible = fichierJSON::getName(value->u.object.values[0].value, "target");
 							
-							if (cible == "PROJO" || cible == "LYRE")
+							if (cible == "BARRELED" || cible == "SPOTLED")
 							{
 								couleur::setCouleur(interfaceDMX, cible, value);
 							}

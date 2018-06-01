@@ -10,12 +10,12 @@ DMX::DMX(int address, string equipement)
 	addr = address;
 	type = equipement;
 	
-	if (type == "LYRE")
+	if (type == "SPOTLED")
 	{
 		nbCanaux = 7;
 	}
 	
-	else if (type == "PROJO")
+	else if (type == "BARRELED")
 	{
 		nbCanaux = 12;
 	}
@@ -26,7 +26,7 @@ DMX::DMX(int address, string equipement)
 //protocol propre à chaque équipement
 void DMX::remplirTab(int valeurDMX[], int red, int green, int blue, int white)
 {
-	if (type == "LYRE")
+	if (type == "SPOTLED")
 	{
 		valeurDMX[addr]=255; //Fixe pour garder le mode DMX
 		valeurDMX[addr+1]=red;
@@ -35,7 +35,7 @@ void DMX::remplirTab(int valeurDMX[], int red, int green, int blue, int white)
 		valeurDMX[addr+4]=white;
 	}
 	
-	else if (type == "PROJO")
+	else if (type == "BARRELED")
 	{
 		for(int i=0; i<=3;i=i+1)
 		{

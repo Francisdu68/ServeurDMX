@@ -51,7 +51,7 @@ void storyboard::lireStoryBoard(EnttecDMXUSB *interfaceDMX)
 	int length = scene.size();
 	for(int i=0; i < length; i++)
 	{
-		if (scene[i].getCible() == "PROJO")
+		if (scene[i].getCible() == "BARRELED")
 		{
 			
 			int ADRESSEDEBUTPROJO = scene[i].getAddr();//On cherche avant tout la cible du message
@@ -60,10 +60,10 @@ void storyboard::lireStoryBoard(EnttecDMXUSB *interfaceDMX)
 				cout << "Adresse invalide, arret du traitement";
 				break;
 			}
-			DMX *projo;
-			projo = new DMX(ADRESSEDEBUTPROJO, "PROJO");
-			int NBCANAUXPROJO = projo->getCanaux();
-			projo->remplirTab(valeurDMX, scene[i].getRed(), scene[i].getGreen(), scene[i].getBlue(), 0);//On rempli le tableau valeurDMX à partir de l'adresse du projo et des valeurs qu'on lui defini
+			DMX *barreLED;
+			barreLED = new DMX(ADRESSEDEBUTPROJO, "BARRELED");
+			int NBCANAUXPROJO = barreLED->getCanaux();
+			barreLED->remplirTab(valeurDMX, scene[i].getRed(), scene[i].getGreen(), scene[i].getBlue(), 0);//On rempli le tableau valeurDMX à partir de l'adresse du projo et des valeurs qu'on lui defini
 
 			for(int j=ADRESSEDEBUTPROJO; j <=ADRESSEDEBUTPROJO+NBCANAUXPROJO - 1; j=j+1)
 			{
@@ -71,11 +71,11 @@ void storyboard::lireStoryBoard(EnttecDMXUSB *interfaceDMX)
 			}
 			interfaceDMX->SendDMX();//on envoie la trame DMX au boitier
 			usleep(scene[i].getTime()*1000);
-			delete projo;
+			delete barreLED;
 		}
 
 		//Si la cible est la lyre
-		else if(scene[i].getCible() == "LYRE")
+		else if(scene[i].getCible() == "SPOTLED")
 		{
 			int ADRESSEDEBUTLYRE = scene[i].getAddr();//On cherche avant tout la cible du message
 			if(ADRESSEDEBUTLYRE<1 || ADRESSEDEBUTLYRE >512)
@@ -83,11 +83,11 @@ void storyboard::lireStoryBoard(EnttecDMXUSB *interfaceDMX)
 				cout << "Adresse invalide, arret du traitement";
 				break;
 			}
-			DMX *lyre;
-			lyre = new DMX(ADRESSEDEBUTLYRE, "LYRE");
+			DMX *spotLED;
+			spotLED = new DMX(ADRESSEDEBUTLYRE, "SPOTLED");
 			
-			int NBCANAUXLYRE = lyre->getCanaux();
-			lyre->remplirTab(valeurDMX, scene[i].getRed(), scene[i].getGreen(), scene[i].getBlue(), scene[i].getWhite());
+			int NBCANAUXLYRE = spotLED->getCanaux();
+			spotLED->remplirTab(valeurDMX, scene[i].getRed(), scene[i].getGreen(), scene[i].getBlue(), scene[i].getWhite());
 			
 			for(int j=ADRESSEDEBUTLYRE; j<=ADRESSEDEBUTLYRE+NBCANAUXLYRE-1; j=j+1)
 			{
@@ -96,7 +96,7 @@ void storyboard::lireStoryBoard(EnttecDMXUSB *interfaceDMX)
 			
 			interfaceDMX->SendDMX();
 			usleep(scene[i].getTime()*1000);
-			delete lyre;
+			delete spotLED;
 		}
 
 		else//si il n'y a pas de cible ou qu'elle est incorrecte
