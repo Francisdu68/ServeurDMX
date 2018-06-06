@@ -1,1 +1,1 @@
-{"data":"MyStoryBoard\"}}","index":1,"isFragmented":true,"packetCount":2}
+{"data":"{\"storyboard\":{\"elements\":[{\"blue\":4,\"green\":255,\"red\":255,\"target\":\"BARRELED\",\"targetAddress\":1,\"time\":1000},{\"blue\":0,\"green\":255,\"red\":127,\"target\":\"BARRELED\",\"targetAddress\":1,\"time\":2000},{\"blue\":0,\"green\":127,\"red\":255,\"target\":\"BARRELED\",\"targetAddress\":1,\"time\":3000}],\"name\":\"bdbd\"}}","index":-1,"isFragmented":false,"packetCount":-1}
